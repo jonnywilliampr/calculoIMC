@@ -1,15 +1,37 @@
-var paciente = document.querySelector("#primeiro-paciente"); //buscando o tr
+var pacientes = document.querySelectorAll(".paciente"); //buscando o tr de todos os pacientes
 
-var tdPeso = paciente.querySelector(".info-peso"); //buscando o td de peso
-var peso = tdPeso.textContent; //buscando valor do peso
+for(i = 0; i < pacientes.length; i++){ //estrutura do loop em for //length torna todos os pacientes em números
 
-var tdAltura = paciente.querySelector(".info-altura"); //buscando o td da altura
-var altura = tdAltura.textContent; //buscando valor da altura
+    var paciente = pacientes[i]; //Irá buscar todos os pacientes dentro do "for"
 
-var tdImc = paciente.querySelector(".info-imc");
+    var tdPeso = paciente.querySelector(".info-peso"); //buscando o td de peso
+    var peso = tdPeso.textContent; //buscando valor do peso
 
+    var tdAltura = paciente.querySelector(".info-altura"); //buscando o td da altura
+    var altura = tdAltura.textContent; //buscando valor da altura
 
-var imc = peso/(altura*altura); //calculando imc
+    var tdImc = paciente.querySelector(".info-imc"); //buscando a td IMC na tabela
 
-tdImc.textContent = imc;
- 
+    var pesoEhValido = true;
+    var alturaEhValida = true;
+
+    if(peso <= 0 || peso >= 400){ //Se peso for menor/igual a 0 ou maior/igual a 400, a peso será inválida.
+        pesoEhValido = false;
+        tdImc.textContent = "Peso inválido!";
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if(altura <= 0 || altura >= 3.00){ //Se altura for menor/igual a 0 ou maior/igual a 3.00, a altura será inválida.
+        alturaEhValido = false;
+        tdImc.textContent = "Altura inválido!"; //o texto do IMC dará como Altura inválida.
+        paciente.classList.add("paciente-invalido"); //Adicionando um estilo css na classe paciente.
+    }
+
+    if(alturaEhValida && pesoEhValido){ //Se altura for válida e o peso for válido, o cálculo do IMC será feito.
+        
+        var imc = peso/(altura*altura); //calculando imc
+        tdImc.textContent = imc.toFixed(2); //colocando texto/resultado do cálculo imc na tabela //toFixed tornará o valor em 2 casas decimais
+
+    }
+}
+
