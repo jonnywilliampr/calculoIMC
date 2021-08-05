@@ -1,3 +1,5 @@
+//Calculando IMC//
+
 var pacientes = document.querySelectorAll(".paciente"); //buscando o tr de todos os pacientes
 
 for(i = 0; i < pacientes.length; i++){ //estrutura do loop em for //length torna todos os pacientes em números
@@ -35,3 +37,40 @@ for(i = 0; i < pacientes.length; i++){ //estrutura do loop em for //length torna
     }
 }
 
+
+//Adicionando Novo Paciente//
+
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
+
+botaoAdicionar.addEventListener("click", (event)=>{
+
+    event.preventDefault(); //Desativar recarregamento de página do input
+
+    var form = document.querySelector("#form-adiciona"); //pegando o campo form do html
+
+    var nome = form.nome.value //pegar o valor-value de cada form
+    var peso = form.peso.value; //pegar o valor-value de cada form
+    var altura = form.altura.value; //pegar o valor-value de cada form
+    var gordura = form.gordura.value; //pegar o valor-value de cada form
+
+    var pacienteTr = document.createElement("tr"); //criando uma tr de um novo paciente
+    var tdNome = document.createElement("td"); //criando uma td para o novo paciente
+    var tdPeso = document.createElement("td");
+    var tdAltura = document.createElement("td");
+    var tdGordura = document.createElement("td");
+    var tdImc = document.createElement("td");
+
+    tdNome.textContent = nome; //alterando conteúdo do valor-value do novo td
+    tdPeso.textContent = peso;
+    tdAltura.textContent = altura;
+    tdGordura.textContent = gordura;
+
+    pacienteTr.appendChild(tdNome); //adicionando o td dentro do tr - adicioando o filho dentro do pai
+    pacienteTr.appendChild(tdPeso);
+    pacienteTr.appendChild(tdAltura);
+    pacienteTr.appendChild(tdGordura);
+
+    var tabela = document.querySelector("#tabela-pacientes");
+
+    tabela.appendChild(pacienteTr); //adicionando o paciente tr dentro da tabela
+});
