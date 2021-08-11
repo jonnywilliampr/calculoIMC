@@ -14,16 +14,16 @@ for(i = 0; i < pacientes.length; i++){ //estrutura do loop em for //length torna
 
     var tdImc = paciente.querySelector(".info-imc"); //buscando a td IMC na tabela
 
-    var pesoEhValido = true;
-    var alturaEhValida = true;
+    var pesoEhValido = validaPeso(peso); // true ou false do peso
+    var alturaEhValida = validaAltura(altura);
 
-    if(peso <= 0 || peso >= 400){ //Se peso for menor/igual a 0 ou maior/igual a 400, a peso será inválida.
+    if(!pesoEhValido){ //Se peso for menor/igual a 0 ou maior/igual a 400, a peso será inválida.
         pesoEhValido = false;
         tdImc.textContent = "Peso inválido!";
         paciente.classList.add("paciente-invalido");
     }
 
-    if(altura <= 0 || altura >= 3.00){ //Se altura for menor/igual a 0 ou maior/igual a 3.00, a altura será inválida.
+    if(!alturaEhValida){ //Se altura for menor/igual a 0 ou maior/igual a 3.00, a altura será inválida.
         alturaEhValido = false;
         tdImc.textContent = "Altura inválido!"; //o texto do IMC dará como Altura inválida.
         paciente.classList.add("paciente-invalido"); //Adicionando um estilo css na classe paciente.
@@ -37,10 +37,32 @@ for(i = 0; i < pacientes.length; i++){ //estrutura do loop em for //length torna
     }
 }
 
-function calculaImc(peso,altura){
+function validaPeso(peso){
+
+    if(peso >= 0 && peso < 1000){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+
+function validaAltura(altura){
+
+    if(altura >= 0 && altura <= 3.00){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+function calculaImc(peso,altura){ //criando uma função para calcular o imc
     var imc = 0;
 
     imc = peso/(altura*altura);
 
     return imc.toFixed(2);
 }
+
